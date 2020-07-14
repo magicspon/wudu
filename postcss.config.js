@@ -8,16 +8,14 @@ module.exports = {
 	plugins: [
 		isStorybook ? require("tailwindcss") : "tailwindcss",
 		process.env.NODE_ENV === "production" && [
-			[
-				"@fullhuman/postcss-purgecss",
-				{
-					content: [
-						"./pages/**/*.{js,jsx,ts,tsx}",
-						"./components/**/*.{js,jsx,ts,tsx}",
-					],
-					defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-				},
-			],
+			"@fullhuman/postcss-purgecss",
+			{
+				content: [
+					"./pages/**/*.{js,jsx,ts,tsx}",
+					"./components/**/*.{js,jsx,ts,tsx}",
+				],
+				defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+			},
 		],
 		isStorybook ? require(`postcss-preset-env`) : "postcss-preset-env",
 	].filter(Boolean),
