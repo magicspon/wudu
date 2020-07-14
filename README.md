@@ -1,23 +1,12 @@
-# GK Joinery
+# Wudu Trees
 
 ## Getting started
 
-```
-yarn
+Create a `.env` file, add the graphcms api keys
 
-// or
+Install the dependencies, either `npm install` or `yarn`. I suggest `yarn`
 
-npm install
-
-```
-
-## To run storybook
-
-```
-npm run storybook
-```
-
-## To run Next
+## To run the site
 
 ```
 npm run dev
