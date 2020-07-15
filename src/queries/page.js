@@ -8,30 +8,15 @@ export default /* GraphQL */ `
 		width
 	}
 
-	query HomePageQuery {
-		homePage(where: { id: "ckcm02d0g03vr0103sx2d4asd" }) {
+	query PageQuery($slug: String) {
+		page(where: { slug: $slug }) {
 			title
+			slug
 			body {
 				html
 			}
-			images {
+			image {
 				...imageFragment
-			}
-			relatedContent {
-				... on Page {
-					id
-					title
-					image {
-						...imageFragment
-					}
-				}
-				... on Project {
-					id
-					title
-					image {
-						...imageFragment
-					}
-				}
 			}
 			metaTitle
 			metaDescription

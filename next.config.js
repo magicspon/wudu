@@ -6,6 +6,7 @@ const { parsed: env } = require("dotenv").config({
 
 module.exports = {
 	env,
+	exportTrailingSlash: true,
 	webpack: (config) => {
 		config.module.rules.push(svg(path.resolve(__dirname, "./src/icons/")))
 
