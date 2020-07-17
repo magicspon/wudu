@@ -1,30 +1,38 @@
 import * as React from "react"
 // import * as T from "prop-types"
 import gqlClient from "@/utils/gqlClient"
-import pagesQuery from "@/queries/projects"
+import projectsQuery from "@/queries/projects"
+import pageQuery from "@/queries/page"
 
-export default function ProjectIndexPage({ data }) {
+export default function ProjectIndexPage(props) {
 	return (
 		<div>
-			<pre>{JSON.stringify({ data }, null, 2)}</pre>
+			<pre>{JSON.stringify(props, null, 2)}</pre>
 		</div>
 	)
 }
 
 export async function getStaticProps({ params }) {
 	const currentPage = params?.currentPage || 0
+	const postPerPage = 2
 
-	const data = await gqlClient().request(pagesQuery, {
-		skip: currentPage * 2,
-		first: 2,
+	const data = await gqlClient().request(projectsQuery, {
+		skip: currentPage * postPerPage,
+		first: postPerPage,
+	})
+
+	const { page } = await gqlClient().request(pageQuery, {
+		slug: "projects",
 	})
 
 	return {
 		props: {
-			data: data.projects.map((project) => ({
+			page,
+			entries: data.projects.map((project) => ({
 				...project,
 				url: `/projects/post/${project.slug}`,
 			})),
+			currentPage,
 		},
 	}
 }
