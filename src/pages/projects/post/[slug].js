@@ -1,12 +1,11 @@
 import * as React from "react"
 // import * as T from "prop-types"
-import slugify from "slugify"
 import gqlClient from "@/utils/gqlClient"
-import pagesQuery from "@/queries/pages"
-import pageQuery from "@/queries/page"
+import pagesQuery from "@/queries/projects"
+import pageQuery from "@/queries/project"
 
-export default function PagePage({ data }) {
-	console.log("funky")
+export default function ProjectPost({ data }) {
+	console.log("ProjectPage")
 	return (
 		<div>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
@@ -24,9 +23,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const data = await gqlClient().request(pagesQuery)
+	const data = await gqlClient().request(pagesQuery, {
+		skip: null,
+		first: null,
+	})
 
-	const paths = data.pages.map((page) => ({
+	const paths = data.projects.map((page) => ({
 		params: {
 			slug: page.slug,
 		},
