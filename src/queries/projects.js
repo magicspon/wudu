@@ -1,9 +1,9 @@
 export default /* GraphQL */ `
-	query PagesQuery() {
-		pages {
+	query ProjectsQuery {
+		projects {
+			slug
 			title
 			id
-			slug
 		}
 	}
 `
